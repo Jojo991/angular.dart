@@ -81,11 +81,11 @@ _addRefToBinder(ElementBinder binder, DirectiveRef ref) {
   var children = annotation.children;
 
   if (annotation.children == NgAnnotation.TRANSCLUDE_CHILDREN) {
-    binder.templateDirective = ref;
+    binder.template = ref;
   } else if(annotation is NgComponent) {
-    binder.componentDirective = ref;
+    binder.component = ref;
   } else {
-    binder.directives.add(ref);
+    binder.decorators.add(ref);
   }
 }
 
@@ -286,7 +286,7 @@ DirectiveSelector directiveSelectorFactory(DirectiveMap directives) {
     List<_ElementSelector> partialSelection;
     var classes = <String, bool>{};
     var attrs = <String, String>{};
-  
+
     switch(node.nodeType) {
       case 1: // Element
         dom.Element element = node;
